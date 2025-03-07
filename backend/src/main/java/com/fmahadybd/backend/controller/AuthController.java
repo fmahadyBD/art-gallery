@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fmahadybd.backend.request.LoginRequest;
 import com.fmahadybd.backend.request.NewUserRequest;
+import com.fmahadybd.backend.response.AuthenticationResponse;
 import com.fmahadybd.backend.response.RegistrationResponse;
 import com.fmahadybd.backend.service.AuthService;
 
@@ -42,5 +44,10 @@ public class AuthController {
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest loginRequest) {
+      return ResponseEntity.ok(authService.login(loginRequest));
     }
 }
