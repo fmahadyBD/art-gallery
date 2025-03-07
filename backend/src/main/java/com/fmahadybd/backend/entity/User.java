@@ -41,37 +41,28 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "Email is required")
-    @Column(unique = true)
-    @Email(message = "Email is invalid")
+    
     private String email;
 
-    @NotBlank(message = "Password is required")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$", message = "Password is invalid")
+    
     private String password;
 
     @Enumerated(value = EnumType.STRING)
-    @NotNull(message = "Role is required")
+
     private ROLE role;
 
-    @NotNull(message = "Date of birth is required")
-    @Past(message = "Date of birth is invalid")
     private Date dob;
 
-    @NotNull(message = "Account expiration status is required")
+
     private boolean isAccountNonExpired;
 
-    @NotNull(message = "Account lock status is required")
     private boolean isAccountNonLocked;
 
-    @NotNull(message = "Credentials expiration status is required")
     private boolean isCredentialsNonExpired;
 
-    @NotNull(message = "Enabled status is required")
     private boolean isEnabled;
 
     @Enumerated(value = EnumType.STRING)
-    @NotNull(message = "Gender is required")
     private GENDER gender;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

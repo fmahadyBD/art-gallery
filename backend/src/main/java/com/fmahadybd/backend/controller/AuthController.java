@@ -17,10 +17,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthController {
 
-
     private final AuthService authService;
     
-
     @PostMapping("/register")
     public ResponseEntity<RegistrationResponse> register(@RequestBody NewUserRequest newUserRequest) {
         if (authService.emailExists(newUserRequest.getEmail())) {
