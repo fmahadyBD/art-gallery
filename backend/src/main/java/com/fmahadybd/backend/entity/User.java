@@ -12,7 +12,6 @@ import com.fmahadybd.backend.enmus.GENDER;
 import com.fmahadybd.backend.enmus.ROLE;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -20,11 +19,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,10 +35,8 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    
     private String email;
 
-    
     private String password;
 
     @Enumerated(value = EnumType.STRING)
@@ -52,7 +44,6 @@ public class User implements UserDetails {
     private ROLE role;
 
     private Date dob;
-
 
     private boolean isAccountNonExpired;
 
