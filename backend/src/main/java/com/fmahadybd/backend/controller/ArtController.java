@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,8 +24,11 @@ public class ArtController {
     private final ArtService artService;
 
     @PostMapping("/save")
-    public ResponseEntity<ApiResponse> createArt(@Valid @RequestBody ArtRequest artRequest, 
-                                               BindingResult bindingResult) {
+    public ResponseEntity<ApiResponse> createArt(
+            @Valid @RequestPart(value = "art") ArtRequest artRequest,
+            @RequestParam(value = "image", required = true) MultipartFile image,
+            BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
@@ -35,7 +39,7 @@ public class ArtController {
         }
 
         try {
-            artService.saveArt(artRequest);
+            artService.saveArt(artRequest, image);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new ApiResponse(true, "Art created successfully", null));
         } catch (Exception e) {
@@ -45,9 +49,13 @@ public class ArtController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ApiResponse> updateArt(@Valid @RequestBody ArtRequest artRequest,
-                                               BindingResult bindingResult,
-                                               @PathVariable Integer id) {
+    public ResponseEntity<ApiResponse> updateArt(
+            @Valid @RequestPart(value = "art") ArtRequest artRequest,
+            @RequestParam(value = "image", required = true) MultipartFile image,
+            BindingResult bindingResult,
+            @PathVariable Integer id) {
+
+                
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
@@ -58,7 +66,7 @@ public class ArtController {
         }
 
         try {
-            artService.updateArt(artRequest, id);
+            artService.updateArt(artRequest, id, image);
             return ResponseEntity.ok()
                     .body(new ApiResponse(true, "Art updated successfully", null));
         } catch (RuntimeException e) {

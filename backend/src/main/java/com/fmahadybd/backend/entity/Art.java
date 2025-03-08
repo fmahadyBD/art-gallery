@@ -1,5 +1,7 @@
 package com.fmahadybd.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,6 +40,7 @@ public class Art {
     private String artist;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "category_id", nullable = false) 
     private Category category;
 

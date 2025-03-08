@@ -17,7 +17,6 @@ public class ArtRequest {
     private String name;
     @NotBlank(message = "Description is required")
     private String description;
-    @NotBlank(message = "Image is required")
     private String image;
     @NotBlank(message = "Price is required")
     private String price;
