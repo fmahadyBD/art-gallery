@@ -34,6 +34,8 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/api/authenticate/**").permitAll()
+                        .requestMatchers("/api/categories/**").hasAuthority("ADMIN")
+                        .requestMatchers("/api/arts/**").hasAuthority("USER")
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
