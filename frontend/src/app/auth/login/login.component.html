@@ -7,10 +7,10 @@
 
                 <div class="mb-3">
                     <label for="">Email</label>
-                    <input type="text" class="form-control" formControlName="username">
-                    <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+                    <input type="text" class="form-control" formControlName="email">
+                    <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
                         class="text-danger">
-                        <small *ngIf="loginForm.get('username')?.errors?.['required']">Email is required!</small>
+                        <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required!</small>
                     </div>
                 </div>
 
