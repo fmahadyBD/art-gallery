@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { LoginRequest } from '../model/LogInRequest.model';
 import { AuthResponse } from '../model/AuthResponse.model';
+import { RegisterRequest } from '../model/RegisterRequest.model';
 
 
 @Injectable({
@@ -31,6 +32,12 @@ export class AuthServiceService {
 
   private isBrowser(): boolean {
     return isPlatformBrowser(this.platformId);
+  }
+
+  // register:
+
+  register(registerRequest: RegisterRequest): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(this.baseUrl + 'register', registerRequest, { headers: this.headers });
   }
 
   // login
@@ -67,29 +74,27 @@ export class AuthServiceService {
     }
   }
 
+
+
   isLoggedIn(): boolean {
-    const token = localStorage.getItem('token');
-    if (token) {
-      if (!this.isTokenExpired(token)) {
-        return true;
+    if (this.isBrowser()) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        if (!this.isTokenExpired(token)) {
+          return true;
+        }
+        this.logout();
       }
-      this.logout();
     }
     return false;
   }
 
   isAdmin(): boolean {
-    if (this.isBrowser()) {
-      return localStorage.getItem('userRole') === 'ADMIN' ? true : false;
-    }
-    return false;
+    return this.isBrowser() && localStorage.getItem('userRole') === 'ADMIN';
   }
 
   isUser(): boolean {
-    if (this.isBrowser()) {
-      return localStorage.getItem('userRole') === 'USER' ? true : false;
-    }
-    return false;
+    return this.isBrowser() && localStorage.getItem('userRole') === 'USER';
   }
 
 

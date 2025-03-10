@@ -1,0 +1,47 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header text-center">
+            <h4>Register</h4>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="register()">
+              <!-- Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" [(ngModel)]="registerRequest.email" name="email" required />
+              </div>
+  
+              <!-- Password -->
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" [(ngModel)]="registerRequest.password" name="password" required />
+              </div>
+  
+              <!-- Date of Birth -->
+              <div class="mb-3">
+                <label for="dob" class="form-label">Date of Birth</label>
+                <input type="date" class="form-control" id="dob" [(ngModel)]="registerRequest.dob" name="dob" required />
+              </div>
+  
+              <!-- Gender -->
+              <div class="mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select class="form-select" id="gender" [(ngModel)]="registerRequest.gender" name="gender" required>
+                  <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
+                </select>
+              </div>
+  
+              <!-- Error Message -->
+              <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-primary w-100">Register</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
