@@ -1,0 +1,24 @@
+<div class="container mt-4">
+    <h2 class="mb-3">Add New Category</h2>
+    
+    <form [formGroup]="categoryForm" (ngSubmit)="addCategory()">
+      <div class="mb-3">
+        <label for="categoryName" class="form-label">Category Name</label>
+        <input type="text" id="categoryName" class="form-control" formControlName="name" placeholder="Enter category name">
+        <div *ngIf="categoryForm.controls['name'].invalid && categoryForm.controls['name'].touched" class="text-danger">
+          Category name is required.
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid">Add Category</button>
+    </form>
+  
+    <div *ngIf="successMessage" class="alert alert-success mt-3">
+      {{ successMessage }}
+    </div>
+    
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
+  </div>
+  

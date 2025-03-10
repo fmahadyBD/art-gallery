@@ -9,6 +9,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { UpdateCategoryComponent } from './admin/update-category/update-category.component';
+import { NewCategoryComponent } from './admin/new-category/new-category.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { RegisterComponent } from './auth/register/register.component';
     LoginComponent,
     HomeComponent,
     AdminComponent,
-    RegisterComponent
+    RegisterComponent,
+    UpdateCategoryComponent,
+    NewCategoryComponent
   ],
   imports: [
     BrowserModule,

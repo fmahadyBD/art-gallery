@@ -4,13 +4,22 @@ import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { authGuard } from './guards/auth.guard';
 import { RegisterComponent } from './auth/register/register.component';
+import { UpdateCategoryComponent } from './admin/update-category/update-category.component';
+import { NewCategoryComponent } from './admin/new-category/new-category.component';
+import { adminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'',component:HomeComponent,canActivate:[authGuard]},
   {path:'admin',component:HomeComponent},
   {path:'register',component:RegisterComponent},
-  { path: '**', redirectTo: '/login' }
+  // { path: '**', redirectTo: '/login' },
+
+
+  // Category
+
+  {path:'new-category',component: NewCategoryComponent,canActivate:[adminGuard]},
+  {path:'update-category',component:UpdateCategoryComponent,canActivate:[adminGuard]}
 ];
 
 @NgModule({
