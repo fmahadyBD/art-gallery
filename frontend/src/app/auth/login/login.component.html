@@ -1,0 +1,36 @@
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center">Login</h2>
+            <form action="" [formGroup]="loginForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+
+                <div class="mb-3">
+                    <label for="">Email</label>
+                    <input type="text" class="form-control" formControlName="username">
+                    <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+                        class="text-danger">
+                        <small *ngIf="loginForm.get('username')?.errors?.['required']">Email is required!</small>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="">Password</label>
+                    <input type="password" class="form-control" formControlName="password">
+                    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                        class="text-danger">
+                        <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is
+                            required!</small>
+                    </div>
+                </div>
+  
+                <button type="submit" class="btn btn-primary"
+                    [disabled]="loginForm.invalid">Login</button>
+
+            </form>
+
+            <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{errorMessage}}</div>
+            <div *ngIf="successMessage" class="alert alert-success mt-3">{{successMessage}}</div>
+        </div>
+    </div>
+</div>
