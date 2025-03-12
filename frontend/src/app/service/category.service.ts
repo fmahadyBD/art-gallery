@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, Observable, throwError } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +15,19 @@ export class CategoryService {
     const token = localStorage.getItem('token');
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+     'Authorization': `Bearer ${token}`
     });
   }
 
   newCategory(categoryRequest: any) {
     return this.http.post(this.baseUrl+'save', categoryRequest, { headers: this.getHeaders() });
   }
+
+
+  private handleError(error: any){
+    console.error("An error occured: ",error);
+    return throwError(()=> new Error(error.message || "Server Error!"));
+
+  }
+
 }

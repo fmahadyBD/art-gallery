@@ -1,5 +1,7 @@
 package com.fmahadybd.backend.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.fmahadybd.backend.entity.Category;
@@ -43,5 +45,9 @@ public class CategoryService {
 
     public Category getCategory(Integer id) {
         return categoryRepository.findById(id).get();
+    }
+
+    public List<Category> getAllCategory(){
+        return categoryRepository.findAll();
     }
 }

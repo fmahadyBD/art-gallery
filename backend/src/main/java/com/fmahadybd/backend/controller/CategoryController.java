@@ -13,6 +13,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -44,7 +45,7 @@ public class CategoryController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<ApiResponse> updateCategory(@Valid @RequestBody CategoryRequest categoryRequest,
                                                     BindingResult bindingResult,
                                                     @PathVariable Integer id) {
@@ -70,7 +71,7 @@ public class CategoryController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<ApiResponse> deleteCategory(@PathVariable Integer id) {
         try {
             categoryService.deleteCategory(id);
@@ -99,4 +100,17 @@ public class CategoryController {
                     .body(new ApiResponse(false, "Failed to retrieve category: " + e.getMessage(), null));
         }
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<ApiResponse> getAllCategory(){
+        try{
+            List<Category> getAllCategories = categoryService.getAllCategory();
+            return ResponseEntity.ok().body(new ApiResponse(true,"Findall category",getAllCategories));
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse(false,"Fail to retrive categories",null));
+
+        }
+    }
+
+
 }

@@ -11,6 +11,8 @@ import { AdminComponent } from './admin/admin.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { UpdateCategoryComponent } from './admin/update-category/update-category.component';
 import { NewCategoryComponent } from './admin/new-category/new-category.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NewCategoryComponent } from './admin/new-category/new-category.componen
     AdminComponent,
     RegisterComponent,
     UpdateCategoryComponent,
-    NewCategoryComponent
+    NewCategoryComponent,
+    NavbarComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,

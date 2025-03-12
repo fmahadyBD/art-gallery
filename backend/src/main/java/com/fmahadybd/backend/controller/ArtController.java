@@ -1,9 +1,12 @@
 package com.fmahadybd.backend.controller;
 
 import com.fmahadybd.backend.entity.Art;
+import com.fmahadybd.backend.entity.Category;
 import com.fmahadybd.backend.request.ArtRequest;
 import com.fmahadybd.backend.response.ApiResponse;
 import com.fmahadybd.backend.service.ArtService;
+import com.fmahadybd.backend.service.CategoryService;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,6 +26,7 @@ import java.util.Map;
 public class ArtController {
 
     private final ArtService artService;
+    private final CategoryService categoryService;
 
     @PostMapping("/save")
     public ResponseEntity<ApiResponse> createArt(
@@ -106,6 +111,18 @@ public class ArtController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse(false, "Failed to retrieve art: " + e.getMessage(), null));
+        }
+    }
+
+
+    @GetMapping("/get-categories")
+     public ResponseEntity<ApiResponse> getAllCategory(){
+        try{
+            List<Category> getAllCategories = categoryService.getAllCategory();
+            return ResponseEntity.ok().body(new ApiResponse(true,"Findall category",getAllCategories));
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse(false,"Fail to retrive categories",null));
+
         }
     }
 }

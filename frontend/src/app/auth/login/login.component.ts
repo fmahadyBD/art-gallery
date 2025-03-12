@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         this.successMessage = "Login successful";
         this.errorMessage = null;
         if(this.authService.isAdmin()){
-          this.router.navigate(['admin']);
+          this.router.navigate(['']);
           return;
         }else if (this.authService.isUser()){
           this.router.navigate(['']);

@@ -7,11 +7,13 @@ import { RegisterComponent } from './auth/register/register.component';
 import { UpdateCategoryComponent } from './admin/update-category/update-category.component';
 import { NewCategoryComponent } from './admin/new-category/new-category.component';
 import { adminGuard } from './guards/admin.guard';
+import { CreatePostComponent } from './create-post/create-post.component';
+
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'',component:HomeComponent,canActivate:[authGuard]},
-  {path:'admin',component:HomeComponent},
+  // {path:'admin',component:HomeComponent},
   {path:'register',component:RegisterComponent},
   // { path: '**', redirectTo: '/login' },
 
@@ -19,7 +21,14 @@ const routes: Routes = [
   // Category
 
   {path:'new-category',component: NewCategoryComponent,canActivate:[adminGuard]},
-  {path:'update-category',component:UpdateCategoryComponent,canActivate:[adminGuard]}
+  {path:'update-category',component:UpdateCategoryComponent,canActivate:[adminGuard]},
+
+
+  // user
+
+  {path:'post',component:CreatePostComponent,canActivate:[authGuard]}
+
+
 ];
 
 @NgModule({

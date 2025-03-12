@@ -103,7 +103,7 @@ public class AuthService {
     }
 
     public AuthenticationResponse login(LoginRequest loginRequest) {
-        System.out.println("In AuthService login method");
+       
 
         try {
             authenticationManager.authenticate(
@@ -120,7 +120,7 @@ public class AuthService {
 
         // Generate JWT
         String jwt = jwtService.generateToken(user);
-        System.out.println("JWT is: " + jwt);
+
 
         // Remove all previous tokens and save the new one
         removeAllTokenByUser(user);
