@@ -50,22 +50,11 @@ export class PostService {
     );
   }
 
-  // getAllArtsWithoutPagination():Observable<any>{
-  //   return this.http.get(this.baseUrl+'get-all-art' , { headers: this.getHeaders() }).pipe(
-  //     catchError(this.handelError)
-  //   );
-  // }
-
-  // getAllArts(page: number, size: number): Observable<any> {
-  //   return this.http.get(`${this.baseUrl}get-all?page=${page}&size=${size}`).pipe(
-  //     catchError(this.handelError)
-  //   );
-  // }
-
   getAllArtsWithoutPagination():Observable<any>{
-    return this.http.get(this.baseUrl + 'get-all-art').pipe( // Remove headers for public API
+    return this.http.get(this.baseUrl + 'get-all-art', 
+      { headers: this.getHeaders() }).pipe(
       catchError(this.handelError)
-  );
+    );
   }
   
 

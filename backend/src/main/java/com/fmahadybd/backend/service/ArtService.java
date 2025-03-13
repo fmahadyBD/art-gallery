@@ -33,9 +33,7 @@ public class ArtService {
     public List<Art> getAllArtsWitthoutPagination(){
         return artRepository.findAll();
     }
-    public Page<Art> getAllArts(Pageable pageable) {
-    return artRepository.findAll(pageable);
-}
+   
 
 
     public void saveArt(ArtRequest artRequest,MultipartFile image) throws IOException {
