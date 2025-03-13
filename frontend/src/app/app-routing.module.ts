@@ -8,6 +8,7 @@ import { UpdateCategoryComponent } from './admin/update-category/update-category
 import { NewCategoryComponent } from './admin/new-category/new-category.component';
 import { adminGuard } from './guards/admin.guard';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { userGuard } from './guards/user.guard';
 
 
 const routes: Routes = [
@@ -26,7 +27,7 @@ const routes: Routes = [
 
   // user
 
-  {path:'post',component:CreatePostComponent,canActivate:[authGuard]}
+  {path:'post',component:CreatePostComponent,canActivate:[userGuard]}
 
 
 ];

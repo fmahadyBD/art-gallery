@@ -1,23 +1,25 @@
 package com.fmahadybd.backend.service;
 
-import com.fmahadybd.backend.entity.Category;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.RequiredArgsConstructor;
-
 import com.fmahadybd.backend.entity.Art;
+import com.fmahadybd.backend.entity.Category;
 import com.fmahadybd.backend.repository.ArtRepository;
 import com.fmahadybd.backend.repository.CategoryRepository;
 import com.fmahadybd.backend.request.ArtRequest;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +29,14 @@ public class ArtService {
 
     @Value("${image.upload.dir}")
     private String imageUploadDir;
+
+    public List<Art> getAllArtsWitthoutPagination(){
+        return artRepository.findAll();
+    }
+    public Page<Art> getAllArts(Pageable pageable) {
+    return artRepository.findAll(pageable);
+}
+
 
     public void saveArt(ArtRequest artRequest,MultipartFile image) throws IOException {
         if(image !=null && !image.isEmpty()){

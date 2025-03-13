@@ -9,7 +9,11 @@ import com.fmahadybd.backend.service.CategoryService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -27,6 +31,42 @@ public class ArtController {
 
     private final ArtService artService;
     private final CategoryService categoryService;
+
+    @GetMapping("/get-all-art")
+    public ResponseEntity<ApiResponse> getArts() {
+        try {
+            List<Art> arts = artService.getAllArtsWitthoutPagination();
+            return ResponseEntity.ok()
+                    .body(new ApiResponse(true, "Arts retrieved successfully", arts));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse(false, e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(false, "Failed to retrieve arts: " + e.getMessage(), null));
+        }
+    }
+
+    @GetMapping("/get-all")
+public ResponseEntity<ApiResponse> getArts(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size) {
+    try {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Art> artPage = artService.getAllArts(pageable);
+        return ResponseEntity.ok()
+                .body(new ApiResponse(true, "Arts retrieved successfully", artPage));
+    } catch (RuntimeException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ApiResponse(false, e.getMessage(), null));
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ApiResponse(false, "Failed to retrieve arts: " + e.getMessage(), null));
+    }
+}
+
+
+
 
     @PostMapping("/save")
     public ResponseEntity<ApiResponse> createArt(

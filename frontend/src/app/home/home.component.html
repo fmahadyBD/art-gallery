@@ -1,3 +1,19 @@
 <app-navbar></app-navbar>
 
-<h1>Welcome to Home</h1>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let art of arts">
+      <div class="card mb-3">
+        <div class="card-body">
+            <img
+            [src]="'http://localhost:8080/images/arts/' + art.image"
+            class="card-img-top"
+            alt="{{ art.image }}"
+          />
+          <h5 class="card-title">{{ art.name }}</h5>
+          <p class="card-text">{{ art.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
