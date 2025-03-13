@@ -5,6 +5,7 @@ import { PostService } from '../service/post.service';
 import { CategoryService } from '../service/category.service';
 import { Router } from '@angular/router';
 import { Category } from '../model/Category.mode';
+import { AuthServiceService } from '../service/auth-service.service';
 
 @Component({
   selector: 'app-create-post',
@@ -23,7 +24,8 @@ export class CreatePostComponent {
   constructor(
     private postService: PostService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthServiceService
   ) {}
 
   ngOnInit(): void {
@@ -70,7 +72,8 @@ export class CreatePostComponent {
     if (this.image) {
       const createPost: PostRequest = {
         ...this.formGroup.value,
-        categoryId: Number(this.formGroup.value.categoryId)
+        categoryId: Number(this.formGroup.value.categoryId),
+        username: this.authService.userName() || null
       };
 
       this.postService.newPost(createPost, this.image).subscribe({

@@ -41,7 +41,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/authenticate/**","/api/public/**","/images/**").permitAll()
                         .requestMatchers("/api/categories/**").hasAuthority("ADMIN")
                         // .requestMatchers("/api/arts/get-all-art").permitAll() 
-                        .requestMatchers("/api/arts/**").hasAuthority("USER")
+                        .requestMatchers("/api/arts/**").hasAnyAuthority("USER","ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

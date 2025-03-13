@@ -48,7 +48,7 @@ export class NewCategoryComponent {
         next: () => {
           this.successMessage = 'Category added successfully!';
           setTimeout(() => {
-            this.router.navigate(['/new-category']); // Redirect after success
+            this.router.navigate(['']); // Redirect after success
           }, 1500);
         },
         error: () => {

@@ -5,18 +5,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fmahadybd.backend.entity.Art;
 import com.fmahadybd.backend.entity.Category;
+import com.fmahadybd.backend.entity.User;
 import com.fmahadybd.backend.repository.ArtRepository;
 import com.fmahadybd.backend.repository.CategoryRepository;
+import com.fmahadybd.backend.repository.UserRepository;
 import com.fmahadybd.backend.request.ArtRequest;
 
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class ArtService {
     private final ArtRepository artRepository;
     private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
 
     @Value("${image.upload.dir}")
     private String imageUploadDir;
@@ -42,6 +44,8 @@ public class ArtService {
             artRequest.setImage(imageFileName);
             
         }
+
+        Optional<User> user = userRepository.findByEmail(artRequest.getUsername());
         Art art = new Art();
         art.setName(artRequest.getName());
         art.setDescription(artRequest.getDescription());
@@ -49,6 +53,7 @@ public class ArtService {
         art.setPrice(artRequest.getPrice());
         art.setStatus(artRequest.getStatus());
         art.setArtist(artRequest.getArtist());
+        user.ifPresent(art::setUser);
 
         Category category = categoryRepository.findById(artRequest.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));

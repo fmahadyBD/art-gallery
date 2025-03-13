@@ -1,5 +1,7 @@
 package com.fmahadybd.backend.entity;
 
+import java.util.Optional;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -43,5 +45,10 @@ public class Art {
     @JsonIgnore
     @JoinColumn(name = "category_id", nullable = false) 
     private Category category;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "user_id",nullable = false)
+    private User user;
 
 }

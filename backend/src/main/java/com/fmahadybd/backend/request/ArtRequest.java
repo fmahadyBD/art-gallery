@@ -26,4 +26,7 @@ public class ArtRequest {
     private String artist;
     @NotNull(message = "Category ID is required")
     private Integer categoryId;
+
+    @NotNull(message = "User name ir required!")
+    private String username;
 }

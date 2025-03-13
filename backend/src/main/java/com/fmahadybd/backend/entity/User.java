@@ -59,6 +59,10 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Token> tokens;
 
+
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval=true)
+    private List<Art> arts;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 

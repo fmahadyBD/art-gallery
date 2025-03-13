@@ -7,6 +7,7 @@ export interface PostRequest{
     status:string;
     artist:string;
     categoryId:number;
+    username:string;
 
 
 }
