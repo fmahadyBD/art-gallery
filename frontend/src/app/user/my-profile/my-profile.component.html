@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="container my-5">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-header text-center">
+            <h3>{{ profile?.name }}'s Profile</h3>
+          </div>
+          <div class="card-body">
+            <!-- User Information -->
+            <div class="mb-3">
+              <strong>Name: </strong> <span>{{ profile?.name }}</span>
+            </div>
+            <div class="mb-3">
+              <strong>Email: </strong> <span>{{ profile?.email }}</span>
+            </div>
+            <div class="mb-3">
+              <strong>Date of Birth: </strong> <span>{{ profile?.date }}</span>
+            </div>
+            <div class="mb-3">
+              <strong>Role: </strong> <span>{{ profile?.role }}</span>
+            </div>
+  
+            <!-- Artworks Section -->
+            <h5 class="mt-4">Artworks</h5>
+            <div class="row">
+              <div class="col-md-4" *ngFor="let art of profile?.arts">
+                <div class="card mb-4">
+                  <img [src]="art.image" class="card-img-top" alt="{{ art.name }}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ art.name }}</h5>
+                    <p class="card-text">{{ art.description }}</p>
+                    <p><strong>Price:</strong> {{ art.price }}</p>
+                    <p><strong>Status:</strong> {{ art.status }}</p>
+                    <p><strong>Artist:</strong> {{ art.artist }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

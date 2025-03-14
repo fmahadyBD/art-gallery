@@ -13,6 +13,7 @@ import { UpdateCategoryComponent } from './admin/update-category/update-category
 import { NewCategoryComponent } from './admin/new-category/new-category.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { MyProfileComponent } from './user/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CreatePostComponent } from './create-post/create-post.component';
     UpdateCategoryComponent,
     NewCategoryComponent,
     NavbarComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -13,19 +13,13 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  // private getHeaders(): HttpHeaders {
-  //   const token = localStorage.getItem('token');
-  //   return new HttpHeaders({
-  //       'Authorization': `Bearer ${token}`
-  //   });
-  // }
-
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
-    return token 
-      ? new HttpHeaders({ 'Authorization': `Bearer ${token}` })
-      : new HttpHeaders();
+    return new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+    });
   }
+
 
   newPost(art: PostRequest, image: File): Observable<PostRequest> {
     const formData = new FormData();
@@ -50,12 +44,17 @@ export class PostService {
     );
   }
 
+
+
+
   getAllArtsWithoutPagination():Observable<any>{
     return this.http.get(this.baseUrl + 'get-all-art', 
       { headers: this.getHeaders() }).pipe(
       catchError(this.handelError)
     );
   }
+
+  
   
 
 }

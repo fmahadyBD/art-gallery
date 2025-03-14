@@ -1,20 +1,36 @@
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateFn, GuardResult, MaybeAsync, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthServiceService } from '../service/auth-service.service';
 
-export const authGuard: CanActivateFn = (route, state) => {
-  const authService = inject(AuthServiceService);
-  const router = inject(Router);
 
-  // Check if already on login page to prevent redirect loop
-  if (state.url === '/login') {
-    return true;
+
+/*
+This before Angular 15
+Recommendation:
+For existing projects or complex logic: Use Type 02 (Class-Based Guard) for consistency with other services and more extensibility.
+*/
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuard implements CanActivate
+{
+  constructor(
+    private authService: AuthServiceService,
+    private router:Router,
+    @Inject(PLATFORM_ID) private platform:Object
+  ){}
+
+
+  canActivate(): boolean {
+    if(this.authService.isLoggedIn()){
+      return true;
+    }else{
+      this.router.navigate(['/login']);
+      return false;
+    }
+     
+    
   }
 
-  if (authService.isLoggedIn()) {
-    return true;  // Allow navigation
-  } else {
-    router.navigate(['/login']);
-    return false;
-  }
-};
+
+}

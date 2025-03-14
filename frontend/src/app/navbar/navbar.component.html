@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg custom-navbar custom-navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Art</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
@@ -6,13 +6,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
-            </ul>
 
-            <!-- Align items to the right -->
             <ul class="navbar-nav ms-auto d-flex align-items-center">
                 <li *ngIf="!isLoggedIn" class="nav-item">
                     <a class="btn btn-success me-2" routerLink="/login">Login</a>
@@ -20,9 +14,19 @@
                 <li *ngIf="!isLoggedIn" class="nav-item">
                     <a class="btn btn-primary me-2" routerLink="/register">Register</a>
                 </li>
-                <li *ngIf="isLoggedIn" class="nav-item">
-                    <button class="btn btn-danger" (click)="logout()">Logout</button>
-                </li>  
+
+                <!-- Dropdown for Logged-in Users -->
+                <li *ngIf="isLoggedIn" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" id="userDropdown" 
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="assets/profile.png" alt="Profile" class="rounded-circle" width="40" height="40">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li class="dropdown-item-text px-3"><a class="btn" (click)="goToProfile()">{{ username }}</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" (click)="logout()">Logout</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
