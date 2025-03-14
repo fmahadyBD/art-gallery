@@ -1,66 +1,118 @@
 <app-navbar></app-navbar>
-<div class="container mt-4">
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-        
-        <div class="form-group">
-            <label for="name">Post Name</label>
-            <input type="text" class="form-control" formControlName="name" required>
-            <div *ngIf="formGroup.get('name')?.invalid && formGroup.get('name')?.touched" class="text-danger">
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <!-- Error Alert that shows at the top after submit -->
+      <div *ngIf="errorMessage && submitted" class="alert alert-danger mb-4">
+        {{ errorMessage }}
+      </div>
+      
+      <!-- Success Alert that shows at the top after successful submission -->
+      <div *ngIf="successMessage" class="alert alert-success mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+          <span>{{ successMessage }}</span>
+        </div>
+      </div>
+      
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Create New Artwork</h4>
+        </div>
+        <div class="card-body p-4">
+          <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+            <!-- Basic Information -->
+            <div class="mb-3">
+              <label for="name" class="form-label">Artwork Title</label>
+              <input type="text" class="form-control" formControlName="name" required placeholder="Enter artwork title">
+              <div *ngIf="(formGroup.get('name')?.invalid && formGroup.get('name')?.touched) || (submitted && formGroup.get('name')?.invalid)" class="text-danger small mt-1">
                 Name is required!
+              </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" formControlName="description" rows="3" required></textarea>
-            <div *ngIf="formGroup.get('description')?.invalid && formGroup.get('description')?.touched" class="text-danger">
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea class="form-control" formControlName="description" rows="4" required placeholder="Describe your artwork..."></textarea>
+              <div *ngIf="(formGroup.get('description')?.invalid && formGroup.get('description')?.touched) || (submitted && formGroup.get('description')?.invalid)" class="text-danger small mt-1">
                 Description is required!
+              </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="price">Price</label>
-            <input type="number" class="form-control" formControlName="price" required>
-            <div *ngIf="formGroup.get('price')?.invalid && formGroup.get('price')?.touched" class="text-danger">
-                Price must be greater than 0!
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="status">Status</label>
-            <input type="text" class="form-control" formControlName="status" required>
-            <div *ngIf="formGroup.get('status')?.invalid && formGroup.get('status')?.touched" class="text-danger">
-                Status is required!
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="artist">Artist</label>
-            <input type="text" class="form-control" formControlName="artist" required>
-            <div *ngIf="formGroup.get('artist')?.invalid && formGroup.get('artist')?.touched" class="text-danger">
-                Artist name is required!
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="categoryId">Category</label>
-            <select formControlName="categoryId" class="form-select" required>
-                <option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</option>
-              </select>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="price" class="form-label">Price ($)</label>
+                  <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" formControlName="price" required placeholder="0.00">
+                  </div>
+                  <div *ngIf="(formGroup.get('price')?.invalid && formGroup.get('price')?.touched) || (submitted && formGroup.get('price')?.invalid)" class="text-danger small mt-1">
+                    Price must be greater than 0!
+                  </div>
+                </div>
+              </div>
               
-            <div *ngIf="formGroup.get('categoryId')?.invalid && formGroup.get('categoryId')?.touched" class="text-danger">
-                Please select a category!
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="status" class="form-label">Status</label>
+                  <select class="form-select" formControlName="status" required>
+                    <option value="" disabled selected>Select status</option>
+                    <option value="Available">Available</option>
+                    <option value="Sold">Sold</option>
+                    <option value="Reserved">Reserved</option>
+                    <option value="Not for sale">Not for sale</option>
+                  </select>
+                  <div *ngIf="(formGroup.get('status')?.invalid && formGroup.get('status')?.touched) || (submitted && formGroup.get('status')?.invalid)" class="text-danger small mt-1">
+                    Status is required!
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
 
-        <div class="mb-3">
-            <label for="file">Upload Image</label>
-            <input type="file" (change)="onFileSelected($event)" class="form-control">
-            <div *ngIf="!image" class="text-danger">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="artist" class="form-label">Artist</label>
+                  <input type="text" class="form-control" formControlName="artist" required placeholder="Artist name">
+                  <div *ngIf="(formGroup.get('artist')?.invalid && formGroup.get('artist')?.touched) || (submitted && formGroup.get('artist')?.invalid)" class="text-danger small mt-1">
+                    Artist name is required!
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="categoryId" class="form-label">Category</label>
+                  <select formControlName="categoryId" class="form-select" required>
+                    <option value="" disabled selected>Select a category</option>
+                    <option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</option>
+                  </select>
+                  <div *ngIf="(formGroup.get('categoryId')?.invalid && formGroup.get('categoryId')?.touched) || (submitted && formGroup.get('categoryId')?.invalid)" class="text-danger small mt-1">
+                    Please select a category!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="file" class="form-label">Upload Image</label>
+              <div class="input-group">
+                <input type="file" (change)="onFileSelected($event)" class="form-control" accept="image/*" id="fileInput">
+                <span class="input-group-text bg-light"><i class="bi bi-image"></i></span>
+              </div>
+              <div *ngIf="!image && submitted" class="text-danger small mt-1">
                 Please select an image!
+              </div>
             </div>
-        </div>
 
-        <button class="btn btn-primary mt-3" type="submit" [disabled]="formGroup.invalid">Submit</button>
-    </form>
+            <div class="d-flex justify-content-between mt-4">
+              <button type="button" class="btn btn-outline-secondary" routerLink="/">Cancel</button>
+              <button class="btn btn-primary" type="submit">
+                <i class="bi bi-cloud-upload me-2"></i>Submit Artwork
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

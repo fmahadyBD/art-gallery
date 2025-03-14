@@ -1,19 +1,22 @@
 <app-navbar></app-navbar>
-
 <div class="container mt-4">
-  <div class="row">
+  <div class="row row-gap-4">
     <div class="col-md-4" *ngFor="let art of arts">
-      <div class="card mb-3">
-        <div class="card-body">
-            <img
+      <div class="card h-100">
+        <div class="image-container">
+          <img
             [src]="'http://localhost:8080/images/arts/' + art.image"
-            class="card-img-top"
+            class="card-img"
             alt="{{ art.image }}"
           />
+        </div>
+        <div class="card-body d-flex flex-column">
           <h5 class="card-title">{{ art.name }}</h5>
-          <p class="card-text">{{ art.description }}</p>
+          <p class="card-text flex-grow-1">{{ art.description }}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<app-my-footer></app-my-footer>

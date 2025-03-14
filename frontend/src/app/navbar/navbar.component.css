@@ -1,8 +1,91 @@
-.custom-navbar {
-    background-color: #ff6600; /* Orange */
-}
-
-.custom-navbar {
-    padding-top: 5px;  
-    padding-bottom: 5px; 
-}
+/* Navbar styling */
+.navbar {
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  
+  .navbar-dark .navbar-nav .nav-link:hover,
+  .navbar-dark .navbar-nav .nav-link:focus {
+    color: #ffffff;
+  }
+  
+  .navbar-dark .navbar-nav .nav-link.active {
+    color: #ffffff;
+    font-weight: 600;
+  }
+  
+  .dropdown-menu {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0;
+  }
+  
+  .dropdown-item {
+    padding: 0.6rem 1.5rem;
+    cursor: pointer;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .dropdown-item.active {
+    background-color: #e9ecef;
+    color: #212529;
+  }
+  
+  /* Navbar search form */
+  .navbar .form-control {
+    border-radius: 20px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .navbar .form-control:focus {
+    background-color: white;
+    color: #212529;
+    box-shadow: none;
+  }
+  
+  .navbar .form-control:focus::placeholder {
+    color: #6c757d;
+  }
+  
+  /* For smaller screens */
+  @media (max-width: 992px) {
+    .navbar .form-control {
+      width: 150px;
+    }
+    
+    .navbar-nav .dropdown-menu {
+      border: none;
+      background-color: rgba(255, 255, 255, 0.1);
+      margin-top: 0.5rem;
+    }
+    
+    .navbar-dark .navbar-nav .dropdown-menu .dropdown-item {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .navbar-dark .navbar-nav .dropdown-menu .dropdown-divider {
+      border-top-color: rgba(255, 255, 255, 0.2);
+    }
+  }

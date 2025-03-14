@@ -21,7 +21,7 @@ export class MyProfileService {
 
 
  profileByUsername(username: string): Observable<any> {
-  return this.http.get(`${this.baseUrl}get/username/${username}`, {
+    return this.http.get(`${this.baseUrl}get/${username}`, {
     headers: this.getHeaders()
   }).pipe(
     catchError(this.handleError) 

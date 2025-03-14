@@ -1,2 +1,24 @@
 1. User can See profile can check his post
 2. 
+
+User can:
+
+    1. profile
+    2. ForgetPassword
+    3. Register
+    4. Post 
+    5. Update and Delete post 
+
+Admin:
+    1. Login
+    2. Create category
+    3. Delete category
+    4. Can Delete Post 
+
+______________________________________
+
+Extra:
+
+1) Pagination
+2) Admin can use search
+3) User can see by category

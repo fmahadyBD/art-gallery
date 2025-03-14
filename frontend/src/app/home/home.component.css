@@ -1,0 +1,64 @@
+/* Footer styling */
+.footer {
+    background-color: var(--bs-primary);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .footer-link {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+  }
+  
+  .footer-link:hover {
+    color: #ffffff;
+    transform: translateX(3px);
+  }
+  
+  .social-icons a {
+    font-size: 1.2rem;
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+  
+  .social-icons a:hover {
+    transform: scale(1.2);
+  }
+  
+  .footer-input {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    border-radius: 20px 0 0 20px;
+  }
+  
+  .footer-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .footer-input:focus {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+    box-shadow: none;
+  }
+  
+  .footer .input-group .btn {
+    border-radius: 0 20px 20px 0;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  
+  /* For smaller screens */
+  @media (max-width: 992px) {
+    .footer h5, .footer h6 {
+      margin-top: 1rem;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .footer .border-top {
+      margin-top: 1rem !important;
+      padding-top: 1rem !important;
+    }
+  }

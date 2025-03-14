@@ -23,8 +23,10 @@ public class ProfileController {
 
     @GetMapping("/get/{username}")
     public ResponseEntity<ApiResponse> getProfileByUsername(@PathVariable String username) {
+       
         try {
             ProfileResponse profileResponse = profileService.getProfileDetails(username);
+            
             return ResponseEntity.ok(new ApiResponse(true, "Successfully retrieved profile", profileResponse));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

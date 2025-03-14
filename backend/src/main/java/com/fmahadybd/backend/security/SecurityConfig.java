@@ -42,6 +42,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/categories/**").hasAuthority("ADMIN")
                         // .requestMatchers("/api/arts/get-all-art").permitAll() 
                         .requestMatchers("/api/arts/**").hasAnyAuthority("USER","ADMIN")
+                        .requestMatchers("/api/profile/**").hasAuthority("USER")
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
@@ -63,6 +64,7 @@ public class SecurityConfig {
      @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+        // configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedOrigins(List.of("http://localhost:4200", "http://127.0.0.1:4200"));
         configuration.setAllowedMethods(List.of("GET", "POST", "DELETE", "PUT", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Cache_Control", "Content-type"));

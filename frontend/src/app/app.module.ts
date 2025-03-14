@@ -14,6 +14,8 @@ import { NewCategoryComponent } from './admin/new-category/new-category.componen
 import { NavbarComponent } from './navbar/navbar.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { MyProfileComponent } from './user/my-profile/my-profile.component';
+import { MyFooterComponent } from './my-footer/my-footer.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { MyProfileComponent } from './user/my-profile/my-profile.component';
     NewCategoryComponent,
     NavbarComponent,
     CreatePostComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    MyFooterComponent,
+
   ],
   imports: [
     BrowserModule,
