@@ -9,7 +9,8 @@ import { PostService } from '../service/post.service';
 })
 export class HomeComponent implements OnInit {
   arts: any[] = [];
-
+  loading: boolean = true;
+  error: string | null = null;
 
   constructor(private artService: PostService) { }
 
@@ -18,20 +19,22 @@ export class HomeComponent implements OnInit {
   }
 
   loadArtsWithoutPagination(): void {
-    this.artService.getAllArtsWithoutPagination().subscribe(
-      response => {
-        console.log('API Response:', response); 
+    this.loading = true;
+    this.artService.getAllArtsWithoutPagination().subscribe({
+      next: (response) => {
+        console.log('API Response:', response);
         if (response.success) {
-          this.arts = response.data;  
-          
-          
+          this.arts = response.data;
+        } else {
+          this.error = response.message || 'Failed to load artworks';
         }
+        this.loading = false;
       },
-      error => {
-        console.error('Error fetching arts:', error);
+      error: (err) => {
+        console.error('Error fetching arts:', err);
+        this.error = 'An error occurred while fetching artworks';
+        this.loading = false;
       }
-    );
+    });
   }
-
-  
 }
