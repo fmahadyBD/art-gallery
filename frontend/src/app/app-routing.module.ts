@@ -10,6 +10,8 @@ import { RegisterComponent } from './auth/register/register.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MyProfileComponent } from './user/my-profile/my-profile.component';
+import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
+import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 
 
 const routes: Routes = [
@@ -19,7 +21,9 @@ const routes: Routes = [
   { path: 'new-category', component: NewCategoryComponent },
   { path: 'update-category', component: UpdateCategoryComponent },
   { path: 'post', component: CreatePostComponent },
-  { path: 'my-profile/:username', component: MyProfileComponent, canActivate: [AuthGuard] }
+  { path: 'my-profile/:username', component: MyProfileComponent, canActivate: [AuthGuard] },
+  { path: 'forget-password', component: ForgetPasswordComponent },
+  { path: 'change-password', component: ChangePasswordComponent }
 ];
 
 

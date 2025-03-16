@@ -15,6 +15,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { MyProfileComponent } from './user/my-profile/my-profile.component';
 import { MyFooterComponent } from './my-footer/my-footer.component';
+import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
+import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import { MyFooterComponent } from './my-footer/my-footer.component';
     CreatePostComponent,
     MyProfileComponent,
     MyFooterComponent,
+    ForgetPasswordComponent,
+    ChangePasswordComponent,
 
   ],
   imports: [

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fmahadybd.backend.service.ForgetPasswordService;
 
 @RestController
-@RequestMapping("/forget-password")
+@RequestMapping("/api/forget-password")
 public class ForgetPasswordController {
 
     @Autowired

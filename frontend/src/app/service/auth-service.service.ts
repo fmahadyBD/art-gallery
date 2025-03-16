@@ -113,6 +113,7 @@ import { RegisterRequest } from '../model/RegisterRequest.model';
 export class AuthServiceService {
 
   private baseUrl = 'http://localhost:8080/api/authenticate/';
+  private forgetUrl = 'http://localhost:8080/api/forget-password/';
   private headers = new HttpHeaders({
     'Content-Type': 'application/json'
   });
@@ -133,10 +134,7 @@ export class AuthServiceService {
     }
   }
 
-  private isBrowser(): boolean {
-    return isPlatformBrowser(this.platformId);
-  }
-
+ 
   // register:
   register(registerRequest: RegisterRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(this.baseUrl + 'register', registerRequest, { headers: this.headers });
@@ -157,32 +155,53 @@ export class AuthServiceService {
     );
   }
 
+
+  // send verfication
+  sendVerificationCode(email: string): any {
+    return this.http.post<any>(this.forgetUrl + 'verification', email);
+  }
+
+  //update password
+ //update password
+updatePassword(email: string, password: string, code: number): any {
+  return this.http.post<any>(this.forgetUrl + 'change-password', 
+    { email, password, code }
+  );
+}
+
+  
+ // logout
+ logout(): void {
+  if (this.isBrowser()) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userRole');
+    this.userRoleSubject.next(null);
+    this.router.navigate(['login']);
+  }
+}
+
+  private isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
+
+
   // decode token
   decodeToken(token: string): any {
     const payload = token.split('.')[1];
     return JSON.parse(atob(payload));
   }
 
-  // logout
-  logout(): void {
-    if (this.isBrowser()) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('userRole');
-      this.userRoleSubject.next(null);
-      this.router.navigate(['login']);
-    }
-  }
-
+ 
   isLoggedIn(): boolean {
-   
-      const token = localStorage.getItem('token');
-      if (token) {
-        if (!this.isTokenExpired(token)) {
-          return true;
-        }
-        this.logout();
+
+    const token = localStorage.getItem('token');
+    if (token) {
+      if (!this.isTokenExpired(token)) {
+        return true;
       }
-    
+      this.logout();
+    }
+
     return false;
   }
 

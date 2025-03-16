@@ -38,7 +38,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/api/authenticate/**","/api/public/**","/images/**").permitAll()
+                        .requestMatchers("/api/authenticate/**","/api/public/**","/images/**","/api/forget-password/**").permitAll()
                         .requestMatchers("/api/categories/**").hasAuthority("ADMIN")
                         // .requestMatchers("/api/arts/get-all-art").permitAll() 
                         .requestMatchers("/api/arts/**").hasAnyAuthority("USER","ADMIN")
