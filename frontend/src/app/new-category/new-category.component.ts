@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CategoryService } from '../../service/category.service';
-import { CategoryRequest } from '../../model/CategoryRequest.model';
+
 import { Router } from '@angular/router';
+import { CategoryRequest } from '../model/CategoryRequest.model';
+import { CategoryService } from '../service/category.service';
 
 @Component({
   selector: 'app-new-category',

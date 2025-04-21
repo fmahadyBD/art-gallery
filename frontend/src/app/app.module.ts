@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
+
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { AdminComponent } from './admin/admin.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { provideHttpClient, withFetch } from '@angular/common/http';
 import { LoginComponent } from './auth/login/login.component';
-import { HomeComponent } from './home/home.component';
-import { AdminComponent } from './admin/admin.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { UpdateCategoryComponent } from './admin/update-category/update-category.component';
-import { NewCategoryComponent } from './admin/new-category/new-category.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { CreatePostComponent } from './create-post/create-post.component';
-import { MyProfileComponent } from './user/my-profile/my-profile.component';
+import { HomeComponent } from './home/home.component';
 import { MyFooterComponent } from './my-footer/my-footer.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { UpdateCategoryComponent } from './update-category/update-category.component';
+import { MyProfileComponent } from './user/my-profile/my-profile.component';
+import { NewCategoryComponent } from './new-category/new-category.component';
+import { AdashboardComponent } from './adashboard/adashboard.component';
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import { MyFooterComponent } from './my-footer/my-footer.component';
     CreatePostComponent,
     MyProfileComponent,
     MyFooterComponent,
+    AdashboardComponent,
+
 
   ],
   imports: [
